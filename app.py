@@ -47,6 +47,8 @@ def create_output(model, users_to_recommend, n_rec, print_csv=True):
 
 @app.route('/Rrecommend', methods=['POST'])
 def recommend():
+    recom = tc.load_model("Models/Rrec/Model") # Load "model.pkl"
+    print ('Retail Recommender Model loaded')
     if recom:
         try:
             json_ = request.get_json(force=True)
@@ -66,6 +68,10 @@ def recommend():
 
 @app.route('/Fpredict', methods=['POST'])
 def predict():
+    pred = joblib.load("Models/Fchurn/model.pkl") # Load "model.pkl"
+    print ('Model loaded')
+    model_columns = joblib.load("Models/Fchurn/model_columns.pkl") # Load "model_columns.pkl"
+
     if pred:
         try:
             json_ = request.get_json(force=True)
